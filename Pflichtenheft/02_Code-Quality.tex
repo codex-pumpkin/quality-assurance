@@ -1,0 +1,126 @@
+%!TEX root = ../Pflichtenheft.tex
+
+\chapter{Software Quality}
+
+\section{Static Analysis}
+
+To ensure a high level of code quality, static code analysis tools were used
+for both the client and the server components of the system.
+
+For the client, the TypeScript ecosystem was used. In particular,
+\textit{TypeScript type checking} and \textit{ESLint} were applied to detect
+potential errors early and to enforce a consistent coding style.
+Additionally, the code was automatically formatted to ensure consistent
+structure and readability.
+
+For the server, static analysis tools were also used during development.
+These tools help identify potential issues such as type inconsistencies,
+unused variables, and possible runtime errors before execution.
+Regular use of static analysis significantly contributed to maintaining
+a high overall code quality throughout the development process.
+
+\section{Extensibility}
+
+The architecture of the system was designed to allow straightforward
+extensibility. This is primarily achieved through the clear separation
+of responsibilities within a layered architecture.
+
+On the client side, the application follows a structured ViewModel
+architecture in which presentation logic is separated from the
+underlying business logic. New functionality can therefore often be
+added by introducing additional ViewModels or services without
+modifying existing components.
+
+Similarly, the server follows a modular architecture. New functionality,
+such as additional API endpoints or business logic modules, can be
+implemented by adding new modules without affecting existing parts of
+the system.
+
+This clear architectural structure ensures that the system can be
+extended with additional features in the future without requiring
+major refactoring.
+
+\section{Testability}
+
+The system provides a high degree of testability due to the clear
+separation between business logic and user interface components.
+
+For the client, extensive automated unit tests were implemented using
+the testing framework \textit{Vitest}. In total, 194 tests were executed,
+all of which passed successfully. The achieved test coverage exceeds
+95\% for statements, lines, and functions.
+
+For the server, automated tests were implemented using the Python
+testing framework \textit{pytest}. The test suite contains 142 tests,
+all of which passed successfully during execution. The tests are
+executed within a Python virtual environment and focus primarily on
+the business and service layers of the application.
+
+The server tests cover components such as:
+
+\begin{itemize}
+    \item API routes and service endpoints
+    \item inference manager
+    \item system manager
+    \item user information manager
+    \item prompt manager
+    \item persistence repositories
+\end{itemize}
+
+A central test bootstrap was implemented in
+\texttt{tests/conftest.py}. This configuration provides default
+environment settings and lightweight dependency stubs, enabling the
+test suite to run without requiring external services.
+
+The current server test coverage is approximately 63\%. Core components
+such as the service APIs, inference logic, system management, and
+persistence layer are well covered by the tests. Lower coverage values
+mainly originate from modules that depend on external integrations,
+such as vector database initialization, graph generation internals,
+OpenAI client transport logic, and validator subprocess paths.
+
+During the development of the test suite, several improvements were
+also made to the server implementation. These include fixing the
+generation of JWT timestamps to use UTC-aware values and correcting
+the initialization path for administrator profile pictures.
+
+External dependencies such as network requests or browser APIs are
+replaced with mock objects during testing, which allows the tests to
+run independently of external services.
+
+Some parts of the user interface, especially complex graphical
+components, are not fully covered by automated tests, since they are
+difficult to verify meaningfully with unit tests.
+
+\section{Code Readability}
+
+To improve code readability, particular attention was given to clear
+structure and consistent naming of classes, methods, and variables.
+
+Additional comments and documentation were added for central
+components and complex logic areas. This improves the maintainability
+of the code and makes it easier for future developers to understand
+and extend the system.
+
+By organizing the system into well-defined modules with clear
+interfaces, the code remains understandable and manageable even as
+the project grows.
+
+\subsection{Measures to Improve Code Quality}
+
+Several measures were implemented during development to further improve
+the overall code quality.
+
+One important step was the introduction of centralized structures for
+commonly used configurations and error translations. This prevents
+duplicate strings and inconsistent configuration definitions
+throughout the codebase.
+
+Furthermore, existing tests were extended and partially restructured
+to increase test coverage and improve test stability. In particular,
+mock objects were introduced for browser functionality and external
+services so that tests can be executed independently from the runtime
+environment.
+
+These measures contribute significantly to the maintainability,
+stability, and long-term extensibility of the system.

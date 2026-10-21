@@ -1,0 +1,31 @@
+%Dies ist die Hauptseite des Dokumentes. Es werden u. a. alle Kapitel,
+%Einstellung im Header eingebunden.  Veränderungen müssen in folgenden Dateien
+%vorgenommen werden:
+      %- einzelne Kapitel (evtl. erweitern)
+
+\input{common/layout.tex}           % Diese Datei enthält alle
+                                           % Layouteinstellungen
+
+\setcounter{secnumdepth}{5}
+
+%------Beginn des Gesamtdokumentes----------------------------------------------
+\begin{document}
+
+%------Eingebundene Seiten, Verzeichnisse bzw. Kapitel--------------------------
+\include{common/titelseite}
+
+\include{common/contributions}% Titelseite
+
+\tableofcontents                           % Inhaltsverzeichnis wird automatisch
+                                           % generiert
+\listoffigures                             % ebenso das Abbildungsverzeichnis
+\listoftables
+
+%----Kapitel des Pflichtenhefts, die mit Inhalt zu füllen sind--------------------
+
+\include{Pflichtenheft/01_Tests}
+\include{Pflichtenheft/02_Code-Quality}
+\include{Pflichtenheft/03_Adressed-Bugs}
+
+%------Ende des Dokumentes------------------------------------------------------
+\end{document}

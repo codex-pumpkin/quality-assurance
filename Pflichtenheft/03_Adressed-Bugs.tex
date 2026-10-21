@@ -1,0 +1,52 @@
+\chapter{Addressed Issues}
+The following chapter presents issues that were found during the quality assurance phase.
+
+\section{User Interface}\label{sec:user-interface}
+Following issues were found in the user interface.
+We also explain briefly how they were addressed and fixed.
+
+\begin{itemize}
+    \item \textbf{Unrecognizable Buttons or actions:} Changed label or icon
+    \item \textbf{Incorrect message for username requirements:} Made error message more detailed
+    \item \textbf{Visualization is lacking a legend:} Added different visualizations for different components
+    \item \textbf{Visualization was hard to see in dark mode:} Changed color scheme
+    \item \textbf{Prompt text is too small:} Increased font size
+    \item \textbf{Chat search is case-sensitive:} Made case-insensitive
+    \item \textbf{Misaligned button in signup window:} Made center-aligned
+    \item \textbf{Missing information about model name:} Added info in the model-configuration window about llm-model provider naming
+\end{itemize}
+
+\subsection{Optional Improvements}
+Following optional improvements were found:
+
+\begin{itemize}
+    \item Unnecessary sliders appear on some browsers
+    \item Partial automatic navigation after some actions
+\end{itemize}
+
+\section{Client Internals}
+Following issues were found in the internal client logic.
+We also explain briefly how they were addressed and fixed.
+
+\begin{itemize}
+    \item \textbf{Send button is not working on some browsers:} Removed the \texttt{on} prefix from a custom event handler name
+    \item \textbf{No way to manually change the UI language:} Added a toggle button
+    \item \textbf{Wrong url destination after logout:} Made the client navigate to \textit{/login} after logout
+    \item \textbf{Some users were not recognized to be authenticated by the auth guards:} Strictened the logic of the auth guards
+    \item \textbf{Tokens were not saved locally:} Fixed the initialization logic of the token handler
+    \item \textbf{Conversation screen would not react to navigations in some cases:} Forced a conversation reload when a navigation action is issued
+    \item \textbf{Debug logs are visible on the browser console:} Removed debug print statements
+\end{itemize}
+
+\section{Server Internals}
+Following issues were found in the internal server logic.
+We also explain briefly how they were addressed and fixed.
+
+\begin{itemize}
+    \item \textbf{Context window given to the LLM was not always sufficient:} Changed the top-k parameter from 2 to 3
+    \item \textbf{Timestamp in JWTs were dependant on the machines timezone:} Changed to now use UTC timestamps
+    \item \textbf{File path for admin profile picture was hardcoded:} Admin profile picture is now according to the volume
+     \item \textbf{Deleting an OpenAI model while an active chat existed caused the system to crash:} Added proper validation and handling when models are removed so existing chats fail gracefully instead of crashing the system
+    \item \textbf{Email confirmation was not triggered when a user signed up without verifying their email and later authenticated via Google OAuth:} Adjusted the authentication flow so that OAuth login now correctly confirms the email address if it matches the account
+    \item \textbf{Trash chunks were being inserted into ChromaDB:} Added a filtering step to detect and remove low-quality chunks before ingestion into ChromaDB.
+\end{itemize}
